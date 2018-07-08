@@ -1,5 +1,5 @@
 #Set the working directory and read the input file
-setwd("C:/Study Materials/Kaggle/heart-disease-uci")
+setwd("C:/Study Materials/Machine Learning/heart-disease-uci")
 heartdata <- read.csv("heart.csv", header = T)
 
 #Setting random seed
@@ -38,3 +38,14 @@ test <- heartdata_n[-idx,]
 #Let's test the accuracy with everyone has the heart disease
 a1 <- rep(1, dim(test)[1])
 (accu1 <- 1-mean(a1 == test$target))
+
+#Correlations of all the numeric fields
+str(heartdata_n)
+cor(subset(heartdata_n,select = c(1,4,5,7,8,10,11)))
+
+#Visualizations of the dependent variable against a categorical variable
+spineplot(heartdata_n$cp, heartdata_n$target)
+
+#Visualization of the dependent variable against a numerical variable
+boxplot(heartdata_n$Age, heartdata_n$target)
+
