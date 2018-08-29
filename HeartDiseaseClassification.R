@@ -99,4 +99,3 @@ plot(cTree, type = "simple")
 cForest <- cforest(target ~ ., data = train)
 cForestPrediction <- predict(cForest, newdata = test[,-14])
 (cForestAccuracy <- 1 - mean(cForestPrediction != test$target))
-
