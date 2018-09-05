@@ -4,6 +4,7 @@ library(e1071)
 library(caret)
 
 #import the input raw data
+setwd("C:/Study Materials/Machine Learning/heart-disease-uci/TextAnalytics-Classification")
 raw.data <- read.csv("spam.csv", stringsAsFactors = FALSE)
 
 #remove unwanted columns
@@ -40,3 +41,17 @@ set.seed(1234) #32984
 idx <- createDataPartition(raw.data$Label, times = 1, p = 0.7, list = FALSE)
 train <- raw.data[idx,]
 test <- raw.data[-idx,]
+
+library(quanteda)
+#Tokenizing the text of train data
+train.tokens <- tokens(train$Text, what = "word",
+                       remove_numbers = TRUE, remove_punct = TRUE,
+                       remove_symbols = TRUE, remove_hyphens = TRUE)
+
+train.tokens[[350]]
+
+#Change to lower case
+train.tokens <- tokens_tolower(train.tokens)
+
+#Remove the stop words
+train.tokens <- tokens_select(train.tokens, stopwords(), selection = "remove")
